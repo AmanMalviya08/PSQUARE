@@ -1,0 +1,155 @@
+:root{
+  --bg: #f6f8ff;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #3554d1;
+  --accent-2: #2b42b8;
+  --radius: 12px;
+  --shadow-md: 0 12px 30px rgba(16,24,40,0.06);
+  --shadow-lg: 0 24px 64px rgba(16,24,40,0.08);
+  --ease: cubic-bezier(.2,.9,.25,1);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color-scheme: light;
+}
+
+*{ box-sizing: border-box; }
+
+.td-page{
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 18px;
+  background: linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+}
+
+/* states */
+.td-loading, .td-empty{
+  text-align:center;
+  padding:36px;
+  color:var(--muted);
+}
+
+/* main card */
+.td-card{
+  display:grid;
+  grid-template-columns: 420px 1fr;
+  gap: 20px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 14px;
+  border:1px solid rgba(15,23,42,0.04);
+  align-items:start;
+  transform-origin: top center;
+  animation: tdEntry 420ms var(--ease) both;
+}
+
+@keyframes tdEntry{
+  from{ opacity:0; transform: translateY(8px) scale(.998) }
+  to{ opacity:1; transform:none }
+}
+
+/* media area */
+.td-media{
+  position:relative;
+  width:100%;
+  height: 320px;
+  border-radius: 10px;
+  overflow:hidden;
+  background: #f1f5f9;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.td-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition: transform .45s var(--ease);
+}
+.td-media:hover img{ transform: scale(1.03); }
+
+/* info column */
+.td-info{ padding:6px 2px; display:flex; flex-direction:column; gap:12px; }
+.td-title{ margin:0; font-size:1.35rem; color:#0f172a; letter-spacing:-0.3px; }
+.td-meta{ display:flex; flex-direction:column; gap:12px; }
+
+.td-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.td-meta-item{
+  background: linear-gradient(180deg,#fff,#fbfdff);
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid rgba(15,23,42,0.04);
+  min-width:140px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.03);
+}
+.td-meta-item .label{ font-size:0.75rem; color:var(--muted); font-weight:700; }
+.td-meta-item .value{ font-size:0.95rem; color:#0f172a; font-weight:800; margin-top:6px; }
+
+.td-price{ margin-left:auto; display:flex; flex-direction:column; align-items:flex-end; gap:4px; min-width:140px; }
+.price-label{ font-size:0.8rem; color:var(--muted); font-weight:700; }
+.price-value{ font-size:1.35rem; font-weight:900; color:#0f172a; }
+.price-sub{ font-size:0.78rem; color:var(--muted); }
+
+/* description */
+.td-desc h3{ margin:0 0 6px 0; color:#0f172a; font-size:1rem; }
+.td-desc p{ margin:0 0 10px 0; color:var(--muted); line-height:1.5; }
+
+/* actions */
+.td-actions{ margin-top:8px; display:flex; gap:10px; align-items:center; }
+.btn-primary, .btn-outline{
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+  border: none;
+}
+.btn-primary{
+  background: linear-gradient(180deg,var(--accent) 0%, var(--accent-2) 100%);
+  color:#fff;
+  box-shadow: 0 12px 36px rgba(53,84,209,0.14);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.btn-primary:hover{ transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.btn-primary[disabled], .btn-primary[aria-disabled="true"]{ opacity:0.6; cursor:not-allowed; transform:none; box-shadow:none; }
+
+.btn-outline{
+  background:transparent;
+  border:1px solid rgba(15,23,42,0.06);
+  color:var(--muted);
+}
+
+/* more info panels */
+.td-more{ margin-top:16px; }
+.td-more-grid{
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  gap:12px;
+  margin-top:8px;
+}
+.panel.small{
+  background: linear-gradient(180deg,#fff,#fbfdff);
+  padding:12px;
+  border-radius:10px;
+  border:1px solid rgba(15,23,42,0.04);
+  box-shadow: 0 8px 24px rgba(16,24,40,0.04);
+}
+
+/* responsive */
+@media (max-width:980px){
+  .td-card{ grid-template-columns: 1fr; }
+  .td-media{ height:220px; }
+  .td-more-grid{ grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width:520px){
+  .td-media{ height:180px; }
+  .td-more-grid{ grid-template-columns: 1fr; }
+}
+
+/* accessibility/focus */
+button:focus, .td-meta-item:focus { outline: 4px solid rgba(53,84,209,0.08); outline-offset:4px; border-radius:8px; }
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; animation:none !important; }
+}

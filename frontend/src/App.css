@@ -1,0 +1,41 @@
+/* styles.css - vanilla CSS for TripCard */
+.trip-card {
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(20,20,20,0.06);
+  padding: 16px;
+  background: linear-gradient(180deg, #fff, #fbfbff);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.trip-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+.trip-loc {
+  font-weight:700;
+  font-size:1.05rem;
+}
+
+.trip-date {
+  color:#666;
+  font-size:0.9rem;
+}
+
+.trip-body p {
+  margin:6px 0;
+  color:#333;
+  font-size:0.95rem;
+}
+
+.trip-footer {
+  display:flex;
+  justify-content:flex-end;
+  margin-top:12px;
+}

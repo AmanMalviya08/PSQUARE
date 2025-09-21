@@ -1,0 +1,345 @@
+:root {
+  --bg: #f5f7fb;
+  --panel: #ffffff;
+  --muted: #6b7280;
+  --primary: #3554d1;
+  --primary-600: #233aa8;
+  --danger: #ef4444;
+  --success: #16a34a;
+  --radius: 12px;
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-md: 0 8px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 18px 40px rgba(0,0,0,0.1);
+  --ease: cubic-bezier(.25,.8,.25,1);
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); }
+
+/* Container */
+.admin-panel {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Titles */
+.panel-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+}
+
+/* Panels / Cards */
+.panel, .card {
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+  border: 1px solid rgba(15,23,42,0.06);
+  transition: all .3s var(--ease);
+}
+.panel:hover, .card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Form */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 800px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+.input {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid #e5e7eb;
+  font-size: 0.95rem;
+  transition: all .2s var(--ease);
+}
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(53,84,209,0.15);
+  outline: none;
+}
+
+/* Buttons */
+.btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-600));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all .25s var(--ease);
+  box-shadow: var(--shadow-sm);
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.btn:active { transform: translateY(0); }
+
+.btn-ghost {
+  background: #f8f9ff;
+  color: var(--primary);
+  border: 1px solid rgba(53,84,209,0.2);
+}
+.btn-danger {
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: #fff;
+}
+.btn-sm {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+/* Table */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.admin-table thead {
+  background: #f0f4ff;
+}
+.admin-table th, .admin-table td {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.admin-table th {
+  font-weight: 700;
+  color: #111827;
+}
+.admin-table tbody tr {
+  transition: all .25s var(--ease);
+}
+.admin-table tbody tr:hover {
+  background: #f9faff;
+}
+
+/* Image preview */
+.table-thumb {
+  width: 80px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+.table-thumb.empty {
+  background: #f1f5f9;
+}
+
+/* Drawer */
+.admin-bookings-drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  z-index: 1000;
+  animation: fadeIn .3s var(--ease);
+}
+.admin-bookings-card {
+  background: var(--panel);
+  border-radius: var(--radius);
+  max-width: 900px;
+  width: 100%;
+  padding: 24px;
+  margin-top: 40px;
+  box-shadow: var(--shadow-lg);
+  animation: popIn .35s var(--ease);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity:0; } to { opacity:1; }
+}
+@keyframes popIn {
+  from { opacity:0; transform: translateY(12px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+
+/* ------------------- Admin form refinements ------------------- */
+/* use after your existing admin.css so it overrides earlier rules */
+
+/* make the form card a bit airier for the top area in your screenshot */
+.panel.card {
+  padding: 22px;
+  border-radius: 14px;
+}
+
+/* nicer grid spacing for form controls */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .form-grid { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* rounded inputs with subtle inset shadow and placeholder clarity */
+.form-grid .input,
+.form-grid input[type="date"],
+.form-grid input[type="time"],
+.form-grid input[type="number"] {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #eef2ff;
+  background: linear-gradient(180deg,#ffffff,#fbfdff);
+  box-shadow: inset 0 -1px 0 rgba(15,23,42,0.02);
+  font-size: .98rem;
+  color: #0f172a;
+  transition: transform .18s var(--ease), box-shadow .22s var(--ease), border-color .18s var(--ease);
+}
+
+/* date/time icons — visible in modern browsers supporting ::-webkit-calendar-picker-indicator */
+.form-grid input[type="date"]::-webkit-calendar-picker-indicator,
+.form-grid input[type="time"]::-webkit-clear-button,
+.form-grid input[type="time"]::-webkit-inner-spin-button {
+  filter: invert(20%) sepia(8%) saturate(600%) hue-rotate(210deg) brightness(95%) contrast(90%);
+  opacity: 0.85;
+}
+
+/* input focus */
+.form-grid .input:focus,
+.form-grid input[type="date"]:focus,
+.form-grid input[type="time"]:focus,
+.form-grid input[type="number"]:focus {
+  outline: none;
+  transform: translateY(-3px);
+  border-color: rgba(53,84,209,0.95);
+  box-shadow: 0 12px 30px rgba(53,84,209,0.06);
+}
+
+/* file input: modern styling using ::file-selector-button */
+.form-grid input[type="file"] {
+  font-size: 0.95rem;
+  color: #0f172a;
+  background: transparent;
+  padding: 6px 0;
+}
+.form-grid input[type="file"]::file-selector-button{
+  margin-right: 12px;
+  border: 1px solid rgba(53,84,209,0.12);
+  background: linear-gradient(180deg, #ffffff, rgba(53,84,209,0.04));
+  color: var(--primary);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform .16s var(--ease), box-shadow .18s var(--ease);
+}
+.form-grid input[type="file"]::file-selector-button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(53,84,209,0.08);
+}
+
+/* fallback file input styling for browsers that ignore ::file-selector-button */
+.form-grid input[type="file"]::-webkit-file-upload-button {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(53,84,209,0.12);
+}
+
+/* file preview box */
+.form-grid img.thumb-preview {
+  width: 160px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.04);
+  box-shadow: 0 8px 26px rgba(15,23,42,0.04);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+.form-grid img.thumb-preview:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(15,23,42,0.08);
+}
+
+/* label style above file field */
+.form-grid label {
+  display:block;
+  font-size: .86rem;
+  color: #374151;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* button row: larger primary, compact secondary */
+.panel > div:last-child {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* make primary more prominent and pill-shaped */
+.panel > div:last-child .btn {
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  box-shadow: 0 14px 40px rgba(53,84,209,0.12);
+}
+
+/* ghost & reset buttons more subtle */
+.panel > div:last-child .btn-ghost {
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid rgba(53,84,209,0.08);
+  padding: 10px 16px;
+  border-radius: 12px;
+}
+.panel > div:last-child .btn-ghost:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+}
+
+/* make Refresh button look like small pill with subtle shadow */
+.panel > div:last-child .btn.btn-ghost[disabled] { opacity: .6; pointer-events: none; }
+
+/* responsive: ensure buttons full width on tiny screens */
+@media (max-width:520px) {
+  .panel > div:last-child { flex-direction: column; align-items: stretch; }
+  .panel > div:last-child .btn,
+  .panel > div:last-child .btn-ghost { width: 100%; }
+  .form-grid img.thumb-preview { width: 100%; height: 160px; }
+}
+
+/* accessibility: visible focus state */
+.panel .btn:focus,
+.form-grid .input:focus,
+.form-grid input[type="file"]:focus {
+  outline: 3px solid rgba(53,84,209,0.12);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* tiny nicety: keep file controls visually grouped on wide screens */
+@media (min-width:900px) {
+  .form-grid > div:nth-last-child(1) { grid-column: 1 / span 3; display:flex; gap:16px; align-items:center; }
+}
